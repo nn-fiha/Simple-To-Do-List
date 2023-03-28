@@ -1,40 +1,8 @@
 import { useState } from "react";
+import List from "./List";
+import ListInput from "./ListInput";
+
 import "./ListBuilder.css";
-
-function ListInput({ handleOnChange, handleOnClick }) {
-  return (
-    <div className="inputList">
-      <input
-        type="text"
-        placeholder="Things to do.."
-        onChange={handleOnChange}
-      />
-      <button type="button" className="button" onClick={handleOnClick}>
-        Add
-      </button>
-    </div>
-  );
-}
-
-function List({ list, handleDeleteItem }) {
-  return (
-    <div className="list">
-      <ul>
-        {list.map((item, index) => {
-          return (
-            <li key={index}>
-              {item} &nbsp;&nbsp;{" "}
-              <i
-                class="uil uil-times-square"
-                onClick={() => handleDeleteItem(index)}
-              ></i>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
-}
 
 function ListBuilder() {
   const [newItem, setNewItem] = useState("");
@@ -43,10 +11,21 @@ function ListBuilder() {
   function handleOnChange(event) {
     setNewItem(event.target.value);
   }
+
+  function doesExist(newItem) {
+    return list.includes(newItem);
+  }
+
   function handleOnClick() {
     if (!newItem) {
+      alert("Empty String!");
       return;
     }
+    if (doesExist(newItem)) {
+      alert("it is already in the list");
+      return;
+    }
+   
     setList([...list, newItem]);
   }
 
