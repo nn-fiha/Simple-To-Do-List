@@ -1,10 +1,9 @@
-
-import ListBuilder from './list builder/ListBuilder';
+import ListBuilder from "./list builder/ListBuilder";
 
 function App() {
   return (
     <div className="App">
-     <ListBuilder/> 
+      <ListBuilder />
     </div>
   );
 }

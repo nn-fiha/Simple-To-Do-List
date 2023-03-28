@@ -9,30 +9,50 @@ function ListBuilder() {
   const [list, setList] = useState([]);
 
   function handleOnChange(event) {
-    setNewItem(event.target.value);
+    setNewItem({
+      name: event.target.value,
+      selected: false,
+    });
   }
 
-  function doesExist(newItem) {
-    return list.includes(newItem);
+  function doesExist(newItemName) {
+    const arr = [...list];
+    return arr.find((item) => item.name === newItemName);
   }
 
   function handleOnClick() {
-    if (!newItem) {
+    if (!newItem.name) {
       alert("Empty String!");
       return;
     }
-    if (doesExist(newItem)) {
-      alert("it is already in the list");
+    if (doesExist(newItem.name)) {
+      alert("It is already in the list");
       return;
     }
-   
+    if (newItem.name.length > 20) {
+      alert("Name is too long!");
+      return;
+    }
+
     setList([...list, newItem]);
+    setNewItem({name: "",
+      selected: false,});
   }
 
   function handleDeleteItem(index) {
-    const newItem = [...list];
-    newItem.splice(index, 1);
-    setList(newItem);
+    const item = [...list];
+    item.splice(index, 1);
+    setList(item);
+  }
+
+  function handleStrikeItem(index) {
+    const items = [...list];
+    if (items[index].selected === true) {
+      items[index].selected = false;
+    } else {
+      items[index].selected = true;
+    }
+    setList([...items]);
   }
 
   return (
@@ -43,8 +63,12 @@ function ListBuilder() {
       <ListInput
         handleOnChange={handleOnChange}
         handleOnClick={handleOnClick}
+         Item={newItem}/>
+      <List
+        list={list}
+        handleDeleteItem={handleDeleteItem}
+        handleStrikeItem={handleStrikeItem}
       />
-      <List list={list} handleDeleteItem={handleDeleteItem} />
     </div>
   );
 }
