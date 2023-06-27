@@ -1,4 +1,6 @@
 # Getting Started with Create React App
+![todolist](https://github.com/nn-fiha/Simple-To-Do-List/assets/79649070/6d78e2f4-c791-41b8-80e9-04325ded4f8d)
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
